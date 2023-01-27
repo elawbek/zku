@@ -1,0 +1,16 @@
+{
+  "name": "zku",
+  "description": "zku",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "circom_tester": "^0.0.19",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.32.0",
+    "hardhat": "^2.12.6",
+    "mocha-chai-jest-snapshot": "^1.1.4",
+    "prettier": "2.8.3",
+    "snarkjs": "^0.5.0"
+  }
+}
