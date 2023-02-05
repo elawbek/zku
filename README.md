@@ -2,6 +2,15 @@
 
 I took the assignments from here: https://zku.gnomio.com/course/view.php?id=8
 
+### Useful links:
+
+1. [Circom2 documentation](https://docs.circom.io/getting-started/installation/)
+2. [circomlib](https://github.com/iden3/circomlib/tree/master/circuits) and [circomlib-matrix](https://github.com/socathie/circomlib-matrix/tree/master/circuits)
+3. [Building circuits and proofs and verify them using the snarkJS CLI](https://www.samsclass.info/141/proj/C523.htm)
+4. [Introduction to Zero Knowledge Proof](https://github.com/enricobottazzi/ZKverse/blob/master/README.md)
+
+---
+
 All circuits are located in the `circuits/helper` folder:
 
 1. `Multiplier2.circom` gets two numbers and proves the result of
@@ -31,9 +40,19 @@ you can also run each test separately:
 
 all of these circuits have a small number of constraints, so we need `powersOfTau28_hez_final_10`, where 10 is the power of two - for less than 1024 (2\*\*10) constraints
 
-### Useful links:
+---
 
-1. [Circom2 documentation](https://docs.circom.io/getting-started/installation/)
-2. [circomlib](https://github.com/iden3/circomlib/tree/master/circuits) and [circomlib-matrix](https://github.com/socathie/circomlib-matrix/tree/master/circuits)
-3. [Building circuits and proofs and verify them using the snarkJS CLI](https://www.samsclass.info/141/proj/C523.htm)
-4. [Introduction to Zero Knowledge Proof](https://github.com/enricobottazzi/ZKverse/blob/master/README.md)
+`Sudoku.circom` receives a sudoku puzzle and its solution and proves the solution
+
+**Note**: an incorrect solution does not create proof
+
+this circuit have a 114002 constraints, so we need `powersOfTau28_hez_final_17` or 2\*\*17
+
+you can run test (about 2 minutes):
+
+```bash
+  sh scripts/compile-Sudoku.sh
+  npx hardhat test test/sudoku.test.ts
+```
+
+---

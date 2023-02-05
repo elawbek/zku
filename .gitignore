@@ -12,4 +12,5 @@ artifacts
 #snarkjs files
 powersOfTau28*
 circuits/**/*Test*/*
+circuits/Sudoku/*
 contracts/*.sol
