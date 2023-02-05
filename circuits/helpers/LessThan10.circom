@@ -1,4 +1,4 @@
-pragma circom 2.0.0;
+pragma circom 2.1.2;
 
 include "../../node_modules/circomlib/circuits/comparators.circom";
 
