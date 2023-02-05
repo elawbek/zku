@@ -8,25 +8,26 @@ const { plonk } = require("snarkjs");
 const wasm_tester = require("circom_tester").wasm;
 
 import {
-  LessThan10PlonkVerifier,
-  LessThan10PlonkVerifier__factory,
+  RangeProofPlonkVerifier,
+  RangeProofPlonkVerifier__factory,
 } from "../typechain-types";
 
-describe("LessThan10 with PLONK", function () {
+describe("RangeProof with PLONK", function () {
   this.timeout(100000000);
-  let lt10verifier: LessThan10PlonkVerifier;
+  let RPverifier: RangeProofPlonkVerifier;
   let signer: SignerWithAddress;
 
   beforeEach(async function () {
     [signer] = await ethers.getSigners();
-    lt10verifier = await new LessThan10PlonkVerifier__factory(signer).deploy();
+    RPverifier = await new RangeProofPlonkVerifier__factory(signer).deploy();
   });
 
   it("Circuit should correctly compare input", async function () {
-    const circuit = await wasm_tester("circuits/LessThan10Test.circom");
+    const circuit = await wasm_tester("circuits/RangeProofTest.circom");
 
     let input = {
       in: 9,
+      range: [5, 25],
     };
 
     let witness = await circuit.calculateWitness(input, true);
@@ -36,9 +37,12 @@ describe("LessThan10 with PLONK", function () {
     // public part of witness
     expect(witness[0]).to.eq(1n); // helper for QAP
     expect(witness[1]).to.eq(1n); // result of circuit
+    expect(witness[2]).to.eq(5n); // range[0]
+    expect(witness[3]).to.eq(25n); // range[1]
 
     input = {
-      in: 11,
+      in: 26,
+      range: [5, 25],
     };
 
     witness = await circuit.calculateWitness(input, true);
@@ -48,16 +52,18 @@ describe("LessThan10 with PLONK", function () {
     // public part of witness
     expect(witness[0]).to.eq(1n); // helper for QAP
     expect(witness[1]).to.eq(0n); // result of circuit
+    expect(witness[2]).to.eq(5n); // range[0]
+    expect(witness[3]).to.eq(25n); // range[1]
   });
 
   it("Should return true for correct proof", async function () {
     const { proof, publicSignals } = await plonk.fullProve(
-      { in: "4" },
-      "circuits/LessThan10Test/LessThan10Test_js/LessThan10Test.wasm",
-      "circuits/LessThan10Test/circuit_final.zkey"
+      { in: "24", range: ["2", "100"] },
+      "circuits/RangeProofTest/RangeProofTest_js/RangeProofTest.wasm",
+      "circuits/RangeProofTest/circuit_final.zkey"
     );
 
-    console.log(`4 < 10 = ${+publicSignals[0] === 1 ? true : false}`);
+    console.log(`2 <= 24 <= 100 = ${+publicSignals[0] === 1 ? true : false}`);
 
     const calldata = await plonk.exportSolidityCallData(proof, publicSignals);
 
@@ -66,7 +72,6 @@ describe("LessThan10 with PLONK", function () {
     const calldataProof = argv.shift();
     const pubSignals = argv.map((x: string) => BigNumber.from(x));
 
-    expect(await lt10verifier.verifyProof(calldataProof, pubSignals)).to.be
-      .true;
+    expect(await RPverifier.verifyProof(calldataProof, pubSignals)).to.be.true;
   });
 });

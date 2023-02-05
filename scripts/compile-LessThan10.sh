@@ -27,4 +27,4 @@ snarkjs zkey export solidityverifier LessThan10Test/circuit_final.zkey ../contra
 
 cd ..
 
-npx ts-node scripts/lessThan10.ts 
+npx ts-node scripts/ts/lessThan10.ts 

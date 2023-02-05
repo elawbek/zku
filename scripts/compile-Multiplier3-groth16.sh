@@ -29,4 +29,4 @@ snarkjs zkey export solidityverifier Multiplier3Test-groth16/circuit_final.zkey 
 
 cd ..
 
-npx ts-node scripts/multiplier3-groth16.ts 
+npx ts-node scripts/ts/multiplier3-groth16.ts 
