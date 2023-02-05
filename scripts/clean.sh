@@ -1,1 +1,1 @@
-rm -rf circuits/Multiplier2Test circuits/Multiplier3Test-* contracts/*.sol
+rm -rf circuits/Multiplier2Test circuits/Multiplier3Test-* circuits/LessThan10Test contracts/*.sol
