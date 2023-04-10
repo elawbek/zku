@@ -1,4 +1,4 @@
-pragma circom 2.1.2;
+pragma circom 2.1.5;
 
 /*This circuit template checks that c is the multiplication of a and b.*/  
 template Multiplier2 () {  

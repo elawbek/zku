@@ -1,4 +1,4 @@
-pragma circom 2.1.2;
+pragma circom 2.1.5;
 
 include "./Multiplier2.circom";
 

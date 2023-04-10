@@ -1,4 +1,4 @@
-pragma circom 2.1.2;
+pragma circom 2.1.5;
 
 include "../node_modules/circomlib-matrix/circuits/matElemSum.circom";
 include "../node_modules/circomlib-matrix/circuits/matElemPow.circom";
