@@ -13,4 +13,5 @@ artifacts
 powersOfTau28*
 circuits/**/*Test*/*
 circuits/Sudoku/*
+circuits/SystemOfEquations/*
 contracts/*.sol

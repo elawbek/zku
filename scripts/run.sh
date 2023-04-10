@@ -5,5 +5,6 @@ sh scripts/compile-MultiplierN.sh
 sh scripts/compile-LessThan10.sh
 sh scripts/compile-RangeProof.sh
 sh scripts/compile-Sudoku.sh
+sh scripts/compile-SystemOfEquations.sh
 
 npx hardhat test
