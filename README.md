@@ -8,6 +8,8 @@ I took the assignments from here: https://zku.gnomio.com/course/view.php?id=8
 2. [circomlib](https://github.com/iden3/circomlib/tree/master/circuits) and [circomlib-matrix](https://github.com/socathie/circomlib-matrix/tree/master/circuits)
 3. [Building circuits and proofs and verify them using the snarkJS CLI](https://www.samsclass.info/141/proj/C523.htm)
 4. [Introduction to Zero Knowledge Proof](https://github.com/enricobottazzi/ZKverse/blob/master/README.md)
+5. [A beginners intro to coding zero knowledge proofs](https://dev.to/spalladino/a-beginners-intro-to-coding-zero-knowledge-proofs-c56)
+6. [ZK Learning Group](https://learn.0xparc.org/)
 
 ---
 
