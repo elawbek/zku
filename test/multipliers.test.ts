@@ -14,6 +14,8 @@ import {
   Multiplier3Groth16Verifier__factory,
   Multiplier3PlonkVerifier,
   Multiplier3PlonkVerifier__factory,
+  MultiplierNPlonkVerifier,
+  MultiplierNPlonkVerifier__factory,
 } from "../typechain-types";
 
 describe("Multiplier2 with PLONK", function () {
@@ -166,5 +168,51 @@ describe("Multiplier3 with PLONK", function () {
     const pubSignals = argv.map((x: string) => BigNumber.from(x));
 
     expect(await m3verifier.verifyProof(calldataProof, pubSignals)).to.be.true;
+  });
+});
+
+describe("MultiplierN with PLONK", function () {
+  this.timeout(100000000);
+  let mNverifier: MultiplierNPlonkVerifier;
+  let signer: SignerWithAddress;
+
+  beforeEach(async function () {
+    [signer] = await ethers.getSigners();
+    mNverifier = await new MultiplierNPlonkVerifier__factory(signer).deploy();
+  });
+
+  it("Circuit should multiply seven numbers correctly", async function () {
+    const circuit = await wasm_tester("circuits/MultiplierNTest.circom");
+
+    const INPUT = {
+      in: [1, 2, 3, 4, 5, 6, 7],
+    };
+
+    const witness = await circuit.calculateWitness(INPUT, true);
+
+    // console.log(witness);
+
+    // public part of witness
+    expect(witness[0]).to.eq(1n); // helper for QAP
+    expect(witness[1]).to.eq(5040n);
+  });
+
+  it("Should return true for correct proof", async function () {
+    const { proof, publicSignals } = await plonk.fullProve(
+      { in: [1, 2, 3, 4, 5, 6, 7] },
+      "circuits/MultiplierNTest/MultiplierNTest_js/MultiplierNTest.wasm",
+      "circuits/MultiplierNTest/circuit_final.zkey"
+    );
+
+    console.log("1 x 2 x 3 x 4 x 5 x 6 x 7 =", publicSignals[0]);
+
+    const calldata = await plonk.exportSolidityCallData(proof, publicSignals);
+
+    const argv = calldata.replace(/["[\]\s]/g, "").split(",");
+
+    const calldataProof = argv.shift();
+    const pubSignals = argv.map((x: string) => BigNumber.from(x));
+
+    expect(await mNverifier.verifyProof(calldataProof, pubSignals)).to.be.true;
   });
 });

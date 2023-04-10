@@ -27,4 +27,4 @@ snarkjs zkey export solidityverifier RangeProofTest/circuit_final.zkey ../contra
 
 cd ..
 
-npx ts-node scripts/ts/rangeProof.ts 
+npx ts-node scripts/ts/plonk.ts RangeProof

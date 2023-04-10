@@ -18,8 +18,9 @@ All circuits are located in the `circuits/helper` folder:
 1. `Multiplier2.circom` gets two numbers and proves the result of
    their multiplication
 2. `Multiplier3.circom` gets three numbers and proves the result of their multiplication
-3. `LessThan10.circom` gets a number and proves it's less than 10
-4. `RangeProof.circom` gets the number and two elements as a range (i.e. [lower bound, upper bound]) and proves that the number is less than or equal to the upper bound and greater than or equal to the lower bound
+3. `MultiplierN.circom` gets arbitrary number of numbers and proves the result of their multiplication
+4. `LessThan10.circom` gets a number and proves it's less than 10
+5. `RangeProof.circom` gets the number and two elements as a range (i.e. [lower bound, upper bound]) and proves that the number is less than or equal to the upper bound and greater than or equal to the lower bound
 
 to run all compilations and tests:
 

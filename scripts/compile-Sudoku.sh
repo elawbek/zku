@@ -27,5 +27,5 @@ snarkjs zkey export solidityverifier Sudoku/circuit_final.zkey ../contracts/Sudo
 
 cd ..
 
-npx ts-node scripts/ts/sudoku.ts 
+npx ts-node scripts/ts/plonk.ts Sudoku
 

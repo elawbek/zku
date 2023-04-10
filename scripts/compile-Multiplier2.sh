@@ -27,4 +27,4 @@ snarkjs zkey export solidityverifier Multiplier2Test/circuit_final.zkey ../contr
 
 cd ..
 
-npx ts-node scripts/ts/multiplier2.ts 
+npx ts-node scripts/ts/plonk.ts Multiplier2
